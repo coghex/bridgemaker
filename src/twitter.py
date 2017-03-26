@@ -45,7 +45,8 @@ class StdOutListener(StreamListener):
 
     
 if __name__ == '__main__':
-    term = input("Input:")
+    inp = sys.argv
+    inp.pop(0)
 #This handles Twitter authetification and the connection to Twitter Streaming API
     l = StdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
@@ -53,6 +54,6 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
 
     #This line filter Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
-    stream.filter(track=term.split())
+    stream.filter(track=inp)
 
 

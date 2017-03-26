@@ -28,12 +28,26 @@
   (major1) == 0 && (major2) <  5 || \
   (major1) == 0 && (major2) == 5 && (minor) <= 7)
 
+/* package process-1.6.0.0 */
+#define VERSION_process "1.6.0.0"
+#define MIN_VERSION_process(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  6 || \
+  (major1) == 1 && (major2) == 6 && (minor) <= 0)
+
 /* package split-0.2.3.1 */
 #define VERSION_split "0.2.3.1"
 #define MIN_VERSION_split(major1,major2,minor) (\
   (major1) <  0 || \
   (major1) == 0 && (major2) <  2 || \
   (major1) == 0 && (major2) == 2 && (minor) <= 3)
+
+/* package unix-2.7.2.0 */
+#define VERSION_unix "2.7.2.0"
+#define MIN_VERSION_unix(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  7 || \
+  (major1) == 2 && (major2) == 7 && (minor) <= 2)
 
 /* tool alex-3.2.1 */
 #define TOOL_VERSION_alex "3.2.1"

@@ -16,16 +16,21 @@ main = do
   putStrLn "Input: "
   inp <- getLine
   installHandler keyboardSignal (Catch (do exitSuccess)) Nothing
-  t1 <- readProcess "python" (["src/twitter.py"] ++ (splitOn " " inp)) ""
-  print t1
-  contents <- readFile "data/twitter_data.txt"
+  --t1 <- readProcess "python" (["src/twitter.py"] ++ (splitOn " " inp)) ""
+  --print t1
 
-  t2 <- readProcess "sh" (["src/reddit.sh"] ++ (splitOn " " inp)) ""
+  --t2 <- readProcess "sh" (["src/reddit.sh"] ++ (splitOn " " inp)) ""
+
+  (_, Just so1, _, ph1) <- createProcess (proc "python" (["src/twitter.py"] ++ (splitOn " " inp))){std_out = CreatePipe}
+  (_, Just so2, _, ph2) <- createProcess (proc "sh" (["src/reddit.sh"] ++ (splitOn " " inp))){std_out = CreatePipe}
+  waitForProcess ph1
+  r1 <- hGetContents so1
+  r2 <- hGetContents so2
+  contents1 <- readFile "data/twitter_data.txt"
   contents2 <- readFile "data/reddit_data.txt"
 
-  let stringinput = splitOn " " $ contents ++ contents2
+  let stringinput = splitOn " " $ contents1 ++ contents2
   let s = alterState (M.empty) stringinput
-
   mapM_ print $ sortBy (comparing snd) $ M.toList s
 
 
